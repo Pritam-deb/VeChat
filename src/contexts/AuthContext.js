@@ -4,11 +4,11 @@ import { auth } from '../firebase';
 
 const AuthContext = React.createContext();
 
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {return useContext(AuthContext)};
 
-export const AuthProvider = ({ children }) => {
+export function AuthProvider({ children })  {
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState();
     const history = useHistory();
 
     useEffect(() => {
@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
         })
         
     }, [user, history])
-    
+
     const value = { user };
     return(
         <AuthContext.Provider value={value}>
